@@ -12,6 +12,10 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 
+app.get("/", function (req, res) {
+    return res.send('is GET');
+})
+
 app.post("/", function (req, res) {
     console.log('dopost')
     doPost(req.body)
