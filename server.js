@@ -2,7 +2,6 @@
 
 let express = require('express');
 let app = express();
-let ejs = require('ejs');
 let request = require('request')
 
 app.set('view engine', 'ejs');
