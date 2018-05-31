@@ -38,7 +38,7 @@ function doSample() {
     // Your Google Cloud Platform project ID
     const projectId = 'project-id-1957904988521210417';
 
-    const keyFilename = '';
+    const keyFilename = '/home/ec2-user/linebot/linebot-852705fba2b0.json';
 
     // Instantiates a client
     const translate = new Translate({
