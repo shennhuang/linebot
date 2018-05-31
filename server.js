@@ -72,9 +72,9 @@ function doSample() {
     const Translate = require('@google-cloud/translate');
 
     // Your Google Cloud Platform project ID
-    const projectId = 'line-204808';
+    const projectId = 'project-id-1957904988521210417';
 
-    const keyFilename = '/home/conor1222/Line-f8360a5c6b62.json';
+    const keyFilename = '';
 
     // Instantiates a client
     const translate = new Translate({
