@@ -34,6 +34,12 @@ app.post("/sample", function (req, res) {
     return res.sendStatus(200);
 })
 
+app.post("/keywordbot", function (req, res) {
+    console.log('do keywordbot')
+    keywordbot(req)
+    return res.sendStatus(200);
+})
+
 function doSample(req) {
 
     // The text to translate
@@ -80,8 +86,45 @@ function doSample(req) {
             });
         }
     })
-
     
+}
+
+function keywordbot(req) {
+    let text = req.body.events[0].message.text;
+    let keyword = ' 翻譯'
+    let keywordlength = 3
+    if (text.slice(-keywordlength) === keyword) {
+        
+        text = text.slice(0, text.length - keywordlength)
+        console.log(text)
+        target = 'en'
+        replyResult = ''
+        translateLanguage(text, target, replyResult, function(replyResult){
+            console.log(replyResult)
+            let replyToken = req.body.events[0].replyToken
+            let options = {
+                method: 'POST',
+                uri: 'https://api.line.me/v2/bot/message/reply',
+
+                // 客制化 headers 內容，主要告訴 Line 收到的訊息格式和 Line Bot 的 Token
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': config.keywordbot.lineAuthorization
+                },
+                body: {
+                    // 告訴 Line 這個訊息回覆給誰
+                    replyToken: replyToken,
+                    messages: [{ type: 'text', text: replyResult }],
+                },
+                json: true,
+            };
+            request(options, function (error, response, body) {
+                if (error) throw new Error(error);
+
+                // console.log(body);
+            });
+        })
+    }
 }
 function detectLanguage (text, callback){
     // 中文: zh-tw 英文: en 日文: ja
