@@ -100,6 +100,7 @@ function detectLanguage (text, callback){
             if (verifyTarget == -1) {
                 target = false;
             }
+            console.log(target)
             callback(target)
         })
         .catch(err => {
@@ -129,7 +130,9 @@ function translateLanguage(text, target, replyResult, callback){
                     targetLanguage = 'fail'
             }
             if (targetLanguage !== 'fail') {
-                replyResult += targetLanguage + "\n" + translationText + "\n\n"
+                console.log(replyResult)
+                if (replyResult) replyResult += "\n\n"
+                replyResult += targetLanguage + "\n" + translationText
             }
             
 
