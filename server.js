@@ -44,6 +44,8 @@ function doSample(req) {
 
     // The text to translate
     const text = req.body.events[0].message.text;
+    console.log(req.body.events[0]);
+    if (!text) return 
     detectLanguage(text, function(target){
         let replyResult = '';
 
